@@ -11,22 +11,39 @@ This is a custom Frappe v15 app installed on a Frappe Cloud-hosted NestERP (rebr
 
 ## Deploy workflow
 
-Frappe Cloud iteration cycle is **5–10 minutes per change**, so get it right per push:
+Frappe Cloud iteration cycle is **5–10 minutes per change**, so get it right per push. **All four steps matter — Deploy alone will silently rebuild against stale code.**
 
-1. Commit + push to `Syncflo-design/production_floor` `main`
-2. Frappe Cloud → **Bench → Deploy** → wait for green tick (this re-bundles assets)
-3. Frappe Cloud → **Site → Migrate** (only needed when fixtures, doctypes, or hooks change; for pure JS/HTML edits Migrate is optional but cheap)
-4. Hard-refresh `/desk/floor-ops` with **Ctrl+Shift+R**, or open in **incognito** (Frappe caches asset bundles aggressively — a normal refresh isn't enough)
+1. Commit + push to `Syncflo-design/production_floor` `main`.
+2. Frappe Cloud → **Bench → Apps → Pull Updates** (also surfaces as "Update Available"). This is the step that fetches the new GitHub commit into the bench. **Skipping this is the #1 cause of "I pushed the fix but it's still broken."** Deploy does NOT pull on its own.
+3. Frappe Cloud → **Bench → Deploy** → wait for green tick. Click into the deploy log and verify the commit hash shown matches your latest push — if it shows the previous commit, step 2 didn't run.
+4. Frappe Cloud → **Site → Migrate** (only needed when fixtures, doctypes, or hooks change; for pure JS/HTML edits Migrate is optional but cheap).
+5. Open `/desk/floor-ops` in **incognito** to bypass cache — Frappe caches bundled assets aggressively and a normal Ctrl+Shift+R is sometimes not enough.
 
-Skip migrate for JS-only changes. Always check the deploy log for the commit hash to confirm the right version was bundled.
+Skip Migrate for JS-only changes. Never skip Pull Updates.
 
 ## ⚠️ Frappe page traps that will burn your day
 
 ### 1. Don't use `frappe.render_template('foo', {})` for desk page HTML
 
-It will not auto-resolve a sibling `foo.html` file by name. The page will load and render blank. **Inline the HTML inside the page's `.js` file** as a JS template literal, then call `page.main.html(INLINED_HTML_STRING)`. The pattern is in `production_floor/floor_ops/page/floor_ops/floor_ops.js`.
+It will not auto-resolve a sibling `foo.html` file by name. The page will load and render blank. **Inline the HTML inside the page's `.js` file** as a string array joined with `\n`, then call `page.main.html(FLOOR_OPS_HTML)`. The pattern is in `production_floor/floor_ops/page/floor_ops/floor_ops.js`.
 
-The `.html` file in the page folder is now dead code; don't reach for it.
+### 1a. The page's `.html` file is NOT dead code — it must stay safe
+
+Frappe's build pipeline **auto-registers `floor_ops.html` as a JS template** by emitting a line like this at the top of the served page bundle:
+
+```js
+frappe.templates["floor_ops"] = '<contents of floor_ops.html, single-quoted>';
+```
+
+It does NOT escape apostrophes inside the HTML when wrapping it. So **any `'` character anywhere in `floor_ops.html` will close that wrapper string and produce a `SyntaxError` at page load** — even if your `.js` file is perfect. This burns hours because the error stack points at `<anonymous>` / `Object.eval (dom.js:30:3)` and looks like it's in your code, but it's actually in the auto-generated wrapper line at the very top of the bundle.
+
+**Rule for `floor_ops.html`:** keep it minimal, with zero apostrophes. Current contents:
+
+```html
+<div id="floor-ops-placeholder"></div>
+```
+
+Don't restore the original styled HTML to it. The real HTML lives inside `FLOOR_OPS_HTML` in `floor_ops.js`. The `.html` file exists only because Frappe's page scaffold expects it.
 
 ### 2. Single quotes inside the inlined-HTML template literal will break parsing
 
