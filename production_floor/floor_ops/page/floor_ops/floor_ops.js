@@ -2,7 +2,7 @@
 // Runs inside NestERP: uses frappe.call(), frappe.session, frappe.show_alert()
 // HTML is embedded directly to avoid frappe.render_template lookup issues.
 // Build marker — search the served file for this string to verify deploy:
-const BUILD_MARKER = "build-2026-05-05-A";
+const BUILD_MARKER = "build-2026-05-05-B";
 
 const FLOOR_OPS_HTML = [
   '<div id="floor-ops-root">',
@@ -278,7 +278,9 @@ frappe.pages['floor-ops'].on_page_load = function(wrapper) {
 // ══════════════════════════════════════════════════════
 //  FLOOR OPS CONTROLLER
 // ══════════════════════════════════════════════════════
-const floorOps = {
+// Attach to window so inline onclick handlers ("floorOps.startScan()") can find it.
+// Page bundle JS runs in a function scope; const declarations are NOT globals.
+window.floorOps = {
   currentWO: null,
   currentAction: null,
   qrScanner: null,

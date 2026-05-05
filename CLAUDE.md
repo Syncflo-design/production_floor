@@ -69,7 +69,21 @@ The app's Python package and its Frappe **module** are not the same thing.
 
 Mixing these (e.g. setting page JSON `"module": "Production Floor"`) causes the page to fail to register cleanly. Both names need to stay distinct or Frappe gets confused.
 
-### 4. Page roles
+### 4. Inline `onclick="..."` handlers need `window.floorOps`, not `const floorOps`
+
+Frappe loads page JS via `new Function(code)`, which means the entire file runs in a **function scope**, not the global scope. So a top-level `const floorOps = {...}` is *not* a global — it's a local in that function.
+
+Inline HTML attribute handlers like `onclick="floorOps.startScan()"` are evaluated by the browser in the **global scope**. They can't see function-local consts. Result: clicks silently fail (or throw `ReferenceError: floorOps is not defined`).
+
+**Rule:** for any object whose methods are called from inline HTML attributes, attach it to `window`:
+
+```js
+window.floorOps = { startScan() { ... }, ... };
+```
+
+`const floorOps = {...}` followed by `window.floorOps = floorOps;` works too. Either form is fine — what's not fine is leaving it as a bare `const`.
+
+### 5. Page roles
 
 `floor_ops.json` requires one of: `Warehouse Operator`, `Manufacturing Manager`, `Manufacturing User`, `System Manager`. If a user can't see the page at all (404 / "not permitted"), that's the first thing to check.
 
