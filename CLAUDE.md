@@ -1,6 +1,20 @@
 # Production Floor — Claude session notes
 
-This is a custom Frappe v15 app installed on a Frappe Cloud-hosted NestERP (rebranded ERPNext) site. Read this before touching anything in `production_floor/floor_ops/` — the gotchas below have already cost real time.
+> **STOP. READ THIS FIRST. DO NOT SKIP.**
+>
+> If you are an AI assistant of any kind (Sonnet, Opus, Haiku, future models, any vendor) working on this repo, the rules in this file are not optional. Each one is here because skipping it has already cost the user 4+ hours of debugging. Do not make assumptions about Frappe page conventions — read this file fully before touching any `.js`, `.html`, or `.json` in `production_floor/floor_ops/`.
+>
+> **The five non-negotiable rules:**
+>
+> 1. HTML for the page goes in `floor_ops.js` as a string array joined with `\n`. Not a backtick template literal. Backticks get mangled by Frappe's bundler.
+> 2. `floor_ops.html` is **not** dead code. Frappe auto-registers its contents as `frappe.templates["floor_ops"] = '...';` in single quotes. Any apostrophe inside the file breaks page parsing. Keep it as `<div id="floor-ops-placeholder"></div>` — do not put real markup back in it.
+> 3. The controller object must be `window.floorOps = {...}`, not `const floorOps = {...}`. Page bundles run in function scope; consts are not globals; inline `onclick` handlers can't see them.
+> 4. Deploy cycle: push → Frappe Cloud Bench → **Pull Updates** (do NOT skip) → Deploy → incognito reload. Always include and bump a `BUILD_MARKER` constant in `floor_ops.js` so deploys are verifiable.
+> 5. When something works after a non-trivial debug, **append the lesson to this file** before ending the session. This file is the project's only memory.
+>
+> Acknowledge you've read this section by referencing one of these five rules in your first response when you start working in this repo.
+
+This is a custom Frappe v16 app installed on a Frappe Cloud-hosted NestERP (rebranded ERPNext) site. The full context, structure, and detailed gotchas follow below.
 
 ## Site & repo
 
