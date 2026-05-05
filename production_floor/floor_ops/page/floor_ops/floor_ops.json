@@ -2,7 +2,7 @@
   "creation": "2026-05-05 00:00:00",
   "doctype": "Page",
   "icon": "octicon octicon-tools",
-  "module": "Production Floor",
+  "module": "Floor Ops",
   "name": "floor-ops",
   "page_name": "floor-ops",
   "roles": [
