@@ -6,7 +6,7 @@ app_version     = "1.0.0"
 app_icon        = "octicon octicon-tools"
 app_color       = "#1F4E79"
 
-# Role access — only Warehouse Operator (and above) can see this page
+# Role access
 has_permission = {}
 
 # Adds page to sidebar for the role
@@ -17,5 +17,5 @@ role_home_page = {
 
 # Workspace fixtures
 fixtures = [
-    { "doctype": "Workspace", "filters": [["module", "=", "Production Floor"]] }
+    { "doctype": "Workspace", "filters": [["module", "=", "Floor Ops"]] }
 ]

@@ -2,7 +2,7 @@
   "doctype": "Workspace",
   "name": "Production Floor",
   "label": "Production Floor",
-  "module": "Production Floor",
+  "module": "Floor Ops",
   "icon": "tools",
   "color": "#1F4E79",
   "is_standard": 1,
