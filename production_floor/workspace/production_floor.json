@@ -1,0 +1,48 @@
+{
+  "doctype": "Workspace",
+  "name": "Production Floor",
+  "label": "Production Floor",
+  "module": "Production Floor",
+  "icon": "tools",
+  "color": "#1F4E79",
+  "is_standard": 1,
+  "roles": [
+    { "role": "Warehouse Operator" },
+    { "role": "Manufacturing User" },
+    { "role": "Manufacturing Manager" }
+  ],
+  "shortcuts": [
+    {
+      "type": "Page",
+      "label": "Floor Operations",
+      "link_to": "floor-ops",
+      "icon": "tools",
+      "color": "#1F4E79",
+      "description": "Issue materials, record production, return stock"
+    },
+    {
+      "type": "DocType",
+      "label": "Work Orders",
+      "link_to": "Work Order",
+      "icon": "manufacturing",
+      "color": "#2E75B6"
+    },
+    {
+      "type": "DocType",
+      "label": "Stock Entries",
+      "link_to": "Stock Entry",
+      "icon": "stock",
+      "color": "#1D6B2E"
+    }
+  ],
+  "cards": [
+    {
+      "label": "My Work",
+      "links": [
+        { "type": "Page",    "label": "Production Floor", "link_to": "floor-ops" },
+        { "type": "DocType", "label": "Work Orders",      "link_to": "Work Order" },
+        { "type": "DocType", "label": "Stock Entries",    "link_to": "Stock Entry" }
+      ]
+    }
+  ]
+}

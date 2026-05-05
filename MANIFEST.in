@@ -1,0 +1,2 @@
+include MANIFEST.in
+recursive-include production_floor *.json *.js *.html *.css *.png *.svg *.ico

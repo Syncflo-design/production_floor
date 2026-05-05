@@ -1,0 +1,16 @@
+{
+  "creation": "2026-05-05 00:00:00",
+  "doctype": "Page",
+  "icon": "octicon octicon-tools",
+  "module": "Production Floor",
+  "name": "floor-ops",
+  "page_name": "floor-ops",
+  "roles": [
+    { "role": "Warehouse Operator" },
+    { "role": "Manufacturing Manager" },
+    { "role": "Manufacturing User" },
+    { "role": "System Manager" }
+  ],
+  "standard": "Yes",
+  "title": "Production Floor"
+}
