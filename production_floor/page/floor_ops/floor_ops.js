@@ -1,5 +1,5 @@
 // Production Floor — Frappe Page Controller
-// Runs inside ERPNext: uses frappe.call(), frappe.session, frappe.show_alert()
+// Runs inside NestERP: uses frappe.call(), frappe.session, frappe.show_alert()
 
 frappe.pages['floor-ops'].on_page_load = function(wrapper) {
   const page = frappe.ui.make_app_page({

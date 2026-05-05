@@ -1,7 +1,7 @@
 app_name        = "production_floor"
 app_title       = "Production Floor"
 app_publisher   = "NestERP / Manifold SA"
-app_description = "Simplified floor operator screens for ERPNext manufacturing"
+app_description = "Simplified floor operator screens for NestERP manufacturing"
 app_version     = "1.0.0"
 app_icon        = "octicon octicon-tools"
 app_color       = "#1F4E79"
