@@ -19,7 +19,7 @@ const FLOOR_OPS_HTML = `
       --grey:  #F5F5F5;
       --radius: 12px;
       --shadow: 0 2px 12px rgba(0,0,0,0.08);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     .fo-screen { display: none; padding: 20px 16px; max-width: 540px; margin: 0 auto; }
@@ -232,15 +232,15 @@ const FLOOR_OPS_HTML = `
       <div id="fo-materials-list"></div>
     </div>
     <div class="fo-actions">
-      <button class="fo-action-btn btn-issue"   id="fo-btn-issue"   onclick="floorOps.openAction('issue')">
+      <button class="fo-action-btn btn-issue"   id="fo-btn-issue"   onclick="floorOps.openAction(&apos;issue&apos;)">
         <span style="font-size:28px">📦</span>
         <div><div>Issue to Production</div><div class="fo-btn-sub">Move raw materials to floor</div></div>
       </button>
-      <button class="fo-action-btn btn-produce" id="fo-btn-produce" onclick="floorOps.openAction('produce')">
+      <button class="fo-action-btn btn-produce" id="fo-btn-produce" onclick="floorOps.openAction(&apos;produce&apos;)">
         <span style="font-size:28px">✅</span>
         <div><div>Record Production</div><div class="fo-btn-sub">Confirm finished goods completed</div></div>
       </button>
-      <button class="fo-action-btn btn-return"  id="fo-btn-return"  onclick="floorOps.openAction('return')">
+      <button class="fo-action-btn btn-return"  id="fo-btn-return"  onclick="floorOps.openAction(&apos;return&apos;)">
         <span style="font-size:28px">↩️</span>
         <div><div>Return Materials</div><div class="fo-btn-sub">Send unused stock back to store</div></div>
       </button>
