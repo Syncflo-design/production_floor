@@ -1,10 +1,12 @@
 [project]
 name = "production_floor"
 authors = [
-    { name = "NestERP / Manifold SA" }
+    { name = "NestERP / Manifold SA", email = "ops@syncflo.co.za" }
 ]
 description = "Simplified floor operator screens for ERPNext manufacturing"
 requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "license.txt" }
 dynamic = ["version"]
 dependencies = []
 

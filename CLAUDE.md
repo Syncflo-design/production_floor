@@ -146,6 +146,46 @@ The Write tool also has an apparent **size cap around ~13 KB** — files larger 
 - New doctype + form view: ~30 min (declarative, no JS).
 - Workflow + permissions: longer — multiple deploy cycles to validate.
 
+## Git Bash scripts for new Frappe apps — lessons learned the hard way
+
+When generating a Git Bash script to initialise and push a **new** Frappe app repo, the following mistakes have already cost time. Do not repeat them.
+
+### 1. The sandbox cannot run git — always hand the script to the user
+
+The Claude sandbox mount blocks `unlink()`, so `git init`, `git commit`, and `git push` all fail with "Operation not permitted" (git creates and tries to delete `.git/index.lock`, `.git/config.lock`, etc.). **All git operations must be done from Windows Git Bash.** Never try to init or commit from the sandbox.
+
+### 2. Never assume the branch name
+
+Git Bash on Windows still defaults to `master` on `git init`. GitHub repos created via the web UI default to `main`. These will be different unless you force it. Always include `git branch -M main` in the script **before** the first push, and always use `--force` or `--force-with-lease` on the first push to a repo that may already have commits from a web-based init.
+
+Full safe first-push sequence:
+```bash
+cd /c/Users/User/<app_folder>
+rm -f .git/config.lock          # always include — sandbox leaves stale locks
+git branch -M main
+git add .
+git commit -m "Initial commit"
+git push --force -u origin main
+```
+
+### 3. `pyproject.toml` with `readme = "README.md"` requires the file to exist
+
+`flit_core` will fail the build with `ConfigError: Description file README.md does not exist` if `pyproject.toml` references a readme that isn't in the repo. Two safe options:
+- **Option A (preferred):** omit the `readme` line from `[project]` entirely.
+- **Option B:** include a minimal `README.md` in the repo root.
+
+The `pyproject.toml` template in `wo_wip` uses Option A. Always use Option A for new apps unless the user specifically wants a README rendered on PyPI/GitHub.
+
+### 4. `.git/config` written by the sandbox is null-byte corrupted
+
+When the sandbox writes a `.git/config` via `git config ...` commands (instead of direct file write), the resulting file is filled with null bytes and git refuses to read it (`fatal: bad config line 1`). The fix is to write the config file directly with `cat > .git/config << 'EOF' ... EOF` from the sandbox, **not** via `git config` commands. But even then, the config.lock left behind can only be deleted from Windows (`rm -f .git/config.lock` in Git Bash).
+
+### 5. Don't path the user to a folder that doesn't exist yet
+
+If the app zip is being delivered to `production_floor/wo_wip.zip`, the extracted folder will be `production_floor/wo_wip/` — not `~/wo_wip/`. Always verify the extraction path before writing the `cd` line in the script.
+
+---
+
 ## When the page renders blank, in order
 
 1. Open DevTools → **Console** (uncheck "Pause on caught exceptions" — jQuery's `:has()` feature probe is not your bug). Look for red errors mentioning `floor_ops` or `FLOOR_OPS_HTML`.

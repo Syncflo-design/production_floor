@@ -1,0 +1,103 @@
+{
+ "charts": [],
+ "content": "[{\"id\": \"hdr-shortcuts\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Shortcuts</b></span>\", \"col\": 12}}, {\"id\": \"sc-issue-rm\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Issue Raw Materials\", \"col\": 4}}, {\"id\": \"sc-work-orders\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Work Orders\", \"col\": 4}}, {\"id\": \"sc-stock-entries\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Stock Entries\", \"col\": 4}}, {\"id\": \"hdr-rm\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Raw Materials</b></span>\", \"col\": 12}}, {\"id\": \"card-rm\", \"type\": \"card\", \"data\": {\"card_name\": \"Raw Materials\", \"col\": 4}}]",
+ "creation": "2026-05-08 00:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "tools",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "RM Issue",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Raw Materials",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue Raw Materials",
+   "link_count": 0,
+   "link_to": "floor-ops",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Work Orders",
+   "link_count": 0,
+   "link_to": "Work Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Entries",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-05-08 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RM Issue",
+ "name": "RM Issue",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Warehouse Operator"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "Manufacturing Manager"
+  }
+ ],
+ "sequence_id": 21.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "label": "Issue Raw Materials",
+   "link_to": "floor-ops",
+   "type": "Page"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "label": "Work Orders",
+   "link_to": "Work Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "label": "Stock Entries",
+   "link_to": "Stock Entry",
+   "type": "DocType"
+  }
+ ],
+ "title": "RM Issue",
+ "type": "Workspace"
+}

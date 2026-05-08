@@ -1,1 +1,0 @@
-# No extra Python dependencies — uses ERPNext/Frappe built-ins only
