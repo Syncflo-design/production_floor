@@ -1,8 +1,8 @@
 {
   "doctype": "Workspace",
-  "name": "Production Floor",
-  "label": "Production Floor",
-  "module": "Floor Ops",
+  "name": "RM Issue",
+  "label": "RM Issue",
+  "module": "RM Issue",
   "icon": "tools",
   "color": "#1F4E79",
   "is_standard": 1,
@@ -14,11 +14,11 @@
   "shortcuts": [
     {
       "type": "Page",
-      "label": "Floor Operations",
+      "label": "Issue Raw Materials",
       "link_to": "floor-ops",
       "icon": "tools",
       "color": "#1F4E79",
-      "description": "Issue materials, record production, return stock"
+      "description": "Issue raw materials to a work order"
     },
     {
       "type": "DocType",
@@ -37,11 +37,11 @@
   ],
   "cards": [
     {
-      "label": "My Work",
+      "label": "Raw Materials",
       "links": [
-        { "type": "Page",    "label": "Production Floor", "link_to": "floor-ops" },
-        { "type": "DocType", "label": "Work Orders",      "link_to": "Work Order" },
-        { "type": "DocType", "label": "Stock Entries",    "link_to": "Stock Entry" }
+        { "type": "Page",    "label": "Issue Raw Materials", "link_to": "floor-ops" },
+        { "type": "DocType", "label": "Work Orders",         "link_to": "Work Order" },
+        { "type": "DocType", "label": "Stock Entries",       "link_to": "Stock Entry" }
       ]
     }
   ]

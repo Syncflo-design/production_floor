@@ -1,7 +1,7 @@
 app_name        = "production_floor"
-app_title       = "Production Floor"
+app_title       = "RM Issue"
 app_publisher   = "NestERP / Manifold SA"
-app_description = "Simplified floor operator screens for NestERP manufacturing"
+app_description = "Simplified operator screen for issuing raw materials to work orders"
 app_version     = "1.0.0"
 app_icon        = "octicon octicon-tools"
 app_color       = "#1F4E79"
@@ -17,5 +17,5 @@ role_home_page = {
 
 # Workspace fixtures
 fixtures = [
-    { "doctype": "Workspace", "filters": [["module", "=", "Floor Ops"]] }
+    { "doctype": "Workspace", "filters": [["module", "=", "RM Issue"]] }
 ]

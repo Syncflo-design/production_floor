@@ -2,7 +2,7 @@
   "creation": "2026-05-05 00:00:00",
   "doctype": "Page",
   "icon": "octicon octicon-tools",
-  "module": "Floor Ops",
+  "module": "RM Issue",
   "name": "floor-ops",
   "page_name": "floor-ops",
   "roles": [
@@ -12,5 +12,5 @@
     { "role": "System Manager" }
   ],
   "standard": "Yes",
-  "title": "Production Floor"
+  "title": "Issue Raw Materials"
 }
